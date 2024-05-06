@@ -1,0 +1,99 @@
+using System;
+
+namespace конвертор валюты
+{
+    class Program
+    {
+        static double RublesToDollars(double rubles, double rate)
+        {
+            return rubles / rate;
+        }
+
+        static double DollarsToRubles(double dollars, double rate)
+        {
+            return dollars * rate;
+        }
+
+        static double RublesToEuros(double rubles, double rate)
+        {
+            return rubles / rate;
+        }
+
+        static double EurosToRubles(double euros, double rate)
+        {
+            return euros * rate;
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Добро пожаловать в конвертер валют!");
+            Console.Write("Введите количество рублей: ");
+            double rubles = double.Parse(Console.ReadLine());
+            Console.Write("Введите количество долларов: ");
+            double dollars = double.Parse(Console.ReadLine());
+            Console.Write("Введите количество евро: ");
+            double euros = double.Parse(Console.ReadLine());
+
+            double rubleToDollarRate = 70; 
+            double dollarToRubleRate = 1 / rubleToDollarRate;
+            double rubleToEuroRate = 80; 
+            double euroToRubleRate = 1 / rubleToEuroRate;
+
+            Console.WriteLine("\nБаланс вашего кошелька:");
+            Console.WriteLine($"Рубли: {rubles}");
+            Console.WriteLine($"Доллары: {dollars}");
+            Console.WriteLine($"Евро: {euros}");
+
+            Console.WriteLine("\nВыберите операцию:");
+            Console.WriteLine("1. Конвертировать рубли в доллары");
+            Console.WriteLine("2. Конвертировать доллары в рубли");
+            Console.WriteLine("3. Конвертировать рубли в евро");
+            Console.WriteLine("4. Конвертировать евро в рубли");
+            Console.Write("Ваш выбор: ");
+
+            int choice = int.Parse(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    Console.Write("Введите сумму в рублях для конвертации: ");
+                    double rublesToConvertToDollars = double.Parse(Console.ReadLine());
+                    double convertedDollars = RublesToDollars(rublesToConvertToDollars, rubleToDollarRate);
+                    rubles -= rublesToConvertToDollars;
+                    dollars += convertedDollars;
+                    break;
+                case 2:
+                    Console.Write("Введите сумму в долларах для конвертации: ");
+                    double dollarsToConvertToRubles = double.Parse(Console.ReadLine());
+                    double convertedRubles = DollarsToRubles(dollarsToConvertToRubles, dollarToRubleRate);
+                    dollars -= dollarsToConvertToRubles;
+                    rubles += convertedRubles;
+                    break;
+                case 3:
+                    Console.Write("Введите сумму в рублях для конвертации: ");
+                    double rublesToConvertToEuros = double.Parse(Console.ReadLine());
+                    double convertedEuros = RublesToEuros(rublesToConvertToEuros, rubleToEuroRate);
+                    rubles -= rublesToConvertToEuros;
+                    euros += convertedEuros;
+                    break;
+                case 4:
+                    Console.Write("Введите сумму в евро для конвертации: ");
+                    double eurosToConvertToRubles = double.Parse(Console.ReadLine());
+                    double convertedRublesFromEuros = EurosToRubles(eurosToConvertToRubles, euroToRubleRate);
+                    euros -= eurosToConvertToRubles;
+                    rubles += convertedRublesFromEuros;
+                    break;
+                default:
+                    Console.WriteLine("Неверный выбор.");
+                    break;
+            }
+
+            Console.WriteLine("\nОбновленный баланс вашего кошелька:");
+            Console.WriteLine($"Рубли: {rubles}");
+            Console.WriteLine($"Доллары: {dollars}");
+            Console.WriteLine($"Евро: {euros}");
+
+            Console.ReadLine();
+        }
+    }
+}
